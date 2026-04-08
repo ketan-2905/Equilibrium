@@ -4,21 +4,23 @@
       "id": "ccp-1",
       "type": "custom",
       "position": {
-        "x": 317.18604083367825,
-        "y": 69.08503692351356
+        "x": 236.8534569075191,
+        "y": 25.169891043879872
       },
       "data": {
         "label": "CCP-1",
         "type": "CCP",
         "details": "Central Clearing House",
-        "isUnconnected": false
+        "isUnconnected": false,
+        "isSelected": false,
+        "shockMagnitude": 0
       },
       "width": 80,
       "height": 80,
       "selected": false,
       "positionAbsolute": {
-        "x": 317.18604083367825,
-        "y": 69.08503692351356
+        "x": 236.8534569075191,
+        "y": 25.169891043879872
       },
       "dragging": false
     },
@@ -33,11 +35,14 @@
         "label": "Reliance, Inc.",
         "type": "Financial Institution",
         "details": "NYQ - RS",
-        "isUnconnected": false
+        "isUnconnected": false,
+        "ticker": "RS",
+        "isSelected": false,
+        "shockMagnitude": 0
       },
       "width": 80,
       "height": 80,
-      "selected": true,
+      "selected": false,
       "positionAbsolute": {
         "x": 366.5599449489905,
         "y": -218.05780239123604
@@ -55,7 +60,10 @@
         "label": "HDFC Bank Limited",
         "type": "Financial Institution",
         "details": "NYQ - HDB",
-        "isUnconnected": false
+        "isUnconnected": false,
+        "ticker": "HDFCBANK.NS",
+        "isSelected": false,
+        "shockMagnitude": 0
       },
       "width": 80,
       "height": 80,
@@ -77,7 +85,10 @@
         "label": "ICICI Bank Limited",
         "type": "Financial Institution",
         "details": "NYQ - IBN",
-        "isUnconnected": false
+        "isUnconnected": false,
+        "ticker": "ICICIBANK.NS",
+        "isSelected": false,
+        "shockMagnitude": 0
       },
       "width": 80,
       "height": 80,
@@ -99,7 +110,10 @@
         "label": "TATA CONSULTANCY SERV LT",
         "type": "Financial Institution",
         "details": "NSI - TCS.NS",
-        "isUnconnected": false
+        "isUnconnected": false,
+        "ticker": "TCS.NS",
+        "isSelected": false,
+        "shockMagnitude": 0
       },
       "width": 80,
       "height": 80,
@@ -107,6 +121,56 @@
       "positionAbsolute": {
         "x": 536.6092181268948,
         "y": -106.23022772677952
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775675160678",
+      "type": "custom",
+      "position": {
+        "x": 577.3569039873182,
+        "y": 174.62641157283005
+      },
+      "data": {
+        "label": "IDFC FIRST BANK LIMITED",
+        "type": "EQUITY",
+        "details": "NSI - IDFCFIRSTB.NS",
+        "ticker": "IDFCFIRSTB.NS",
+        "isUnconnected": false,
+        "isSelected": false,
+        "shockMagnitude": 0
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 577.3569039873182,
+        "y": 174.62641157283005
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775675352549",
+      "type": "custom",
+      "position": {
+        "x": 255.42975094910832,
+        "y": 224.9522882752875
+      },
+      "data": {
+        "label": "AXIS BANK LIMITED",
+        "type": "EQUITY",
+        "details": "NSI - AXISBANK.NS",
+        "ticker": "AXISBANK.NS",
+        "isUnconnected": false,
+        "isSelected": false,
+        "shockMagnitude": 0
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 255.42975094910832,
+        "y": 224.9522882752875
       },
       "dragging": false
     }
@@ -123,7 +187,11 @@
         "stroke": "#94a3b8",
         "strokeWidth": 2
       },
-      "id": "reactflow__edge-HDB-ccp-1"
+      "id": "reactflow__edge-HDB-ccp-1",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
     },
     {
       "source": "ccp-1",
@@ -136,7 +204,11 @@
         "stroke": "#94a3b8",
         "strokeWidth": 2
       },
-      "id": "reactflow__edge-ccp-1-IBN"
+      "id": "reactflow__edge-ccp-1-IBN",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
     },
     {
       "source": "HDB",
@@ -149,7 +221,11 @@
         "stroke": "#3b82f6",
         "strokeWidth": 2
       },
-      "id": "reactflow__edge-HDB-IBN"
+      "id": "reactflow__edge-HDB-IBN",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
     },
     {
       "source": "HDB",
@@ -162,7 +238,11 @@
         "stroke": "#3b82f6",
         "strokeWidth": 2
       },
-      "id": "reactflow__edge-HDB-RS"
+      "id": "reactflow__edge-HDB-RS",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
     },
     {
       "source": "RS",
@@ -175,7 +255,11 @@
         "stroke": "#3b82f6",
         "strokeWidth": 2
       },
-      "id": "reactflow__edge-RS-IBN"
+      "id": "reactflow__edge-RS-IBN",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
     },
     {
       "id": "e-TCS.NS-ccp-1",
@@ -188,7 +272,142 @@
       "style": {
         "stroke": "#94a3b8",
         "strokeWidth": 2
+      },
+      "data": {
+        "isFailed": false,
+        "isCongested": false
       }
+    },
+    {
+      "source": "TCS.NS",
+      "sourceHandle": null,
+      "target": "RS",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-TCS.NS-RScenter",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775675160678",
+      "sourceHandle": null,
+      "target": "ccp-1",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775675160678-ccp-1center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775675160678",
+      "sourceHandle": null,
+      "target": "TCS.NS",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775675160678-TCS.NScenter",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "id": "edge-node-1775675352549-ccp",
+      "source": "node-1775675352549",
+      "target": "ccp-1",
+      "type": "custom",
+      "data": {
+        "isCCPConnection": true,
+        "isFailed": false,
+        "isCongested": false
+      },
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "edge-ccp-node-1775675352549",
+      "source": "ccp-1",
+      "target": "node-1775675352549",
+      "type": "custom",
+      "data": {
+        "isCCPConnection": true,
+        "isFailed": false,
+        "isCongested": false
+      },
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "source": "node-1775675352549",
+      "sourceHandle": null,
+      "target": "node-1775675160678",
+      "targetHandle": "center",
+      "type": "custom",
+      "data": {
+        "isCCPConnection": false,
+        "isFailed": false,
+        "isCongested": false
+      },
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775675352549-node-1775675160678center"
     }
   ]
 }

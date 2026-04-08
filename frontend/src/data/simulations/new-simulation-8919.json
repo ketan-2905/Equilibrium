@@ -11,7 +11,8 @@
         "label": "ICICI BANK LTD.",
         "type": "Financial Institution",
         "details": "NSI - ICICIBANK.NS",
-        "isUnconnected": true
+        "isUnconnected": true,
+        "ticker": "ICICIBANK.NS"
       },
       "width": 80,
       "height": 80,
@@ -33,7 +34,8 @@
         "label": "KOTAK MAHINDRA BANK LTD",
         "type": "Financial Institution",
         "details": "NSI - KOTAKBANK.NS",
-        "isUnconnected": true
+        "isUnconnected": true,
+        "ticker": "KOTAKBANK.NS"
       },
       "width": 80,
       "height": 80,
@@ -55,7 +57,8 @@
         "label": "BAJAJ FINANCE LIMITED",
         "type": "Financial Institution",
         "details": "NSI - BAJFINANCE.NS",
-        "isUnconnected": true
+        "isUnconnected": true,
+        "ticker": "BAJFINANCE.NS"
       },
       "width": 80,
       "height": 80,
@@ -77,7 +80,8 @@
         "label": "BSE LIMITED",
         "type": "Financial Institution",
         "details": "NSI - BSE.NS",
-        "isUnconnected": true
+        "isUnconnected": true,
+        "ticker": "BSE.NS"
       },
       "width": 80,
       "height": 80

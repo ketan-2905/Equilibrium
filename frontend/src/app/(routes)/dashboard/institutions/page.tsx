@@ -128,7 +128,7 @@ export default function InstitutionsPage() {
 
         try {
             // Fetch real balance sheet data from backend
-            const response = await fetch(`http://localhost:8001/api/balance-sheet/${institution.ticker}`);
+            const response = await fetch(`http://localhost:8000/api/balance-sheet/${institution.ticker}`);
 
             if (!response.ok) {
                 throw new Error('Failed to fetch balance sheet data');
@@ -146,6 +146,45 @@ export default function InstitutionsPage() {
             setLoading(false);
         }
     };
+
+    // Filtered Institutions based on simulation
+    const [filteredInstitutions, setFilteredInstitutions] = React.useState<Institution[]>(INSTITUTIONS);
+
+    React.useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const simId = params.get('simId');
+
+        if (simId) {
+            const fetchSimTickers = async () => {
+                try {
+                    const res = await fetch(`/api/simulation/${simId}`);
+                    if (res.ok) {
+                        const simData = await res.json();
+                        const simTickers = (simData.nodes || [])
+                            .filter((n: any) => n.data.type !== 'CCP')
+                            .map((n: any) => n.data.ticker);
+
+                        // Filter the default list to only include tickers present in the simulation
+                        // OR if a ticker is missing from our default list, add it dynamically
+                        const simulationInstitutions = (simData.nodes || [])
+                            .filter((n: any) => n.data.type !== 'CCP')
+                            .map((n: any) => ({
+                                name: n.data.label,
+                                ticker: n.data.ticker,
+                                type: n.data.type || 'Institution',
+                                marketCap: n.data.marketCap || 500000, // Fallback mcap
+                                rating: n.data.rating || 'AA'
+                            }));
+
+                        setFilteredInstitutions(simulationInstitutions);
+                    }
+                } catch (err) {
+                    console.error("Failed to filter institutions:", err);
+                }
+            };
+            fetchSimTickers();
+        }
+    }, []);
 
     // Fallback calculation if API fails
     const generateFallbackBalanceSheet = (institution: Institution): BalanceSheet => {
@@ -242,12 +281,19 @@ export default function InstitutionsPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Left: Institutions List */}
                     <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                            <Building2 size={20} className="text-indigo-600" />
-                            All Institutions ({INSTITUTIONS.length})
+                        <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <Building2 size={20} className="text-indigo-600" />
+                                All Institutions ({filteredInstitutions.length})
+                            </div>
+                            {filteredInstitutions.length !== INSTITUTIONS.length && (
+                                <span className="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">
+                                    Context: Simulation
+                                </span>
+                            )}
                         </h2>
                         <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2">
-                            {INSTITUTIONS.map((institution) => (
+                            {filteredInstitutions.map((institution) => (
                                 <button
                                     key={institution.ticker}
                                     onClick={() => handleInstitutionClick(institution)}

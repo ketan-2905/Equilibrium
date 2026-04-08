@@ -94,7 +94,7 @@ const FinancialNode = ({ data, id }: NodeProps<NodeData>) => {
 const nodeTypes = { custom: FinancialNode };
 
 // --- API URL ---
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export default function FinancialInfrastructureMap() {
     const [nodes, setNodes, onNodesChange] = useNodesState<NodeData>([]);

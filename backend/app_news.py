@@ -14,7 +14,7 @@ from typing import List, Dict, Any, Optional
 from huggingface_hub import hf_hub_download
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from openai import OpenAI
+from groq import Groq
 
 # Load environment variables
 load_dotenv()
@@ -24,9 +24,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # --- LLM Client Setup ---
-llm_client = OpenAI(
-    base_url="https://api.featherless.ai/v1",
-    api_key=os.getenv("FEATHERLESS_API_KEY")
+llm_client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 def analyze_cascade_with_llm(

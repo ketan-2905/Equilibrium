@@ -18,7 +18,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
     try {
         const { id } = await params
         const { nodes, edges } = await req.json();

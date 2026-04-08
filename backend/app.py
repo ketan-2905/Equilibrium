@@ -14,7 +14,7 @@ from typing import List, Dict, Any, Optional
 from huggingface_hub import hf_hub_download
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from openai import OpenAI
+from groq import Groq
 
 # Load environment variables
 load_dotenv()
@@ -24,9 +24,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # --- LLM Client Setup ---
-llm_client = OpenAI(
-    base_url="https://api.featherless.ai/v1",
-    api_key=os.getenv("FEATHERLESS_API_KEY")
+llm_client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 def analyze_cascade_with_llm(
@@ -93,7 +92,7 @@ IMPORTANT: Only include nodes from the NETWORK NODES list. The shocked node must
 
     try:
         response = llm_client.chat.completions.create(
-            model="moonshotai/Kimi-K2-Instruct",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": "You are a financial risk analyst. Always respond with valid JSON only."},
                 {"role": "user", "content": prompt}
@@ -315,16 +314,23 @@ def _run_ccp_funds_self_checks():
 # --- Helper Functions ---
 
 def load_config():
-    """Load configuration from frontend/config.json."""
+    """Load configuration from config.json."""
     global config
     try:
-        if os.path.exists(CONFIG_PATH):
-            with open(CONFIG_PATH, "r") as f:
+        # Try local config.json first (deployment)
+        if os.path.exists("config.json"):
+            config_file = "config.json"
+        else:
+            # Fallback for local development
+            config_file = "../frontend/config.json"
+            
+        if os.path.exists(config_file):
+            with open(config_file, "r") as f:
                 config = json.load(f)
-            logger.info("Config loaded successfully.")
+            logger.info(f"Config loaded from {config_file}")
         else:
              # Fallback default config if file is missing (though unlikely in this setup)
-            logger.warning(f"Config file not found at {CONFIG_PATH}. Using defaults.")
+            logger.warning(f"Config file not found. Using hardcoded defaults.")
             config = {
                 "tickers": ["HDFCBANK.NS", "KOTAKBANK.NS", "ICICIBANK.NS", "BAJFINANCE.NS", "BSE.NS", 
                             "TCS.NS", "INFY.NS", "RELIANCE.NS", "SBIN.NS", "ADANIENT.NS", 
@@ -762,21 +768,20 @@ async def simulate(request: SimulationRequest):
     if not model or not scaler:
         raise HTTPException(status_code=503, detail="Model not loaded.")
     
-    all_tickers = config["tickers"]
+    # NEW: Allow dynamic tickers beyond just config.json
+    all_tickers = list(set(config["tickers"] + request.tickers))
     valid_tickers = set(all_tickers)
+    tickers_subset = [t for t in request.tickers if t] # Take all requested
     
-    # Validate tickers
-    tickers_subset = request.tickers
     if not tickers_subset:
-        raise HTTPException(status_code=400, detail="Tickers list cannot be empty.")
-    
-    invalid = [t for t in tickers_subset if t not in valid_tickers]
-    if invalid:
-        raise HTTPException(status_code=400, detail=f"Invalid tickers: {invalid}. Must be in config.")
+        tickers_subset = all_tickers
+        logger.info("No tickers provided. Falling back to default universe.")
     
     # Validate shocked_node
-    if request.shocked_node not in valid_tickers:
-        raise HTTPException(status_code=400, detail=f"shocked_node '{request.shocked_node}' not in allowed universe.")
+    shocked_node = request.shocked_node
+    if shocked_node not in valid_tickers:
+        logger.warning(f"shocked_node '{shocked_node}' not in allowed universe. Using '{tickers_subset[0]}' as quantitative proxy.")
+        shocked_node = tickers_subset[0]
     
     # Fetch data
     start_date = request.start if request.start else config["start"]
@@ -1074,7 +1079,7 @@ Respond in this exact JSON array format:
     
     try:
         response = llm_client.chat.completions.create(
-            model="Qwen/Qwen2.5-Coder-32B-Instruct",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": "You are a financial news generator for Indian markets. Generate realistic, professional news in JSON format only."},
                 {"role": "user", "content": prompt}

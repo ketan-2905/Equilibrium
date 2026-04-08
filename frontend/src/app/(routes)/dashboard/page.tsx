@@ -6,7 +6,6 @@ import dashboardData from "@/data/dashboard.json";
 
 export default function DashboardPage() {
   const [simulations, setSimulations] = useState<any[]>([]);
-  console.log(dashboardData);
 
 
   useEffect(() => {
@@ -14,7 +13,6 @@ export default function DashboardPage() {
     // However, since we are writing to it, we should fetch it via API to see updates
     // But for simplicity in this turn, we can just load the imported JSON or fetch from an API endpoint we created?
     // Let's use the local import for initial render + maybe a fetch
-    console.log(dashboardData);
 
     setSimulations(dashboardData);
   }, []);

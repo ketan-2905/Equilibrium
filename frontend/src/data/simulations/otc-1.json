@@ -1,0 +1,345 @@
+{
+  "nodes": [
+    {
+      "id": "node-1775672072094",
+      "type": "custom",
+      "position": {
+        "x": 172,
+        "y": 140
+      },
+      "data": {
+        "label": "Reliance, Inc.",
+        "type": "Bank",
+        "details": "NYQ - RS",
+        "ticker": "RS.NS",
+        "isUnconnected": false,
+        "defaultProbability": 0.35
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 172,
+        "y": 140
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775672090742",
+      "type": "custom",
+      "position": {
+        "x": 396,
+        "y": 72.80671336915523
+      },
+      "data": {
+        "label": "Axis Capital Holdings Limited",
+        "type": "Bank",
+        "details": "NYQ - AXS",
+        "ticker": "AXS.NS",
+        "isUnconnected": false
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 396,
+        "y": 72.80671336915523
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775672097103",
+      "type": "custom",
+      "position": {
+        "x": 576,
+        "y": 284.0525522450329
+      },
+      "data": {
+        "label": "AXIS BANK LIMITED",
+        "type": "Bank",
+        "details": "NSI - AXISBANK.NS",
+        "ticker": "AXISBANK.NS",
+        "isUnconnected": false,
+        "defaultProbability": 0
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 576,
+        "y": 284.0525522450329
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775672105993",
+      "type": "custom",
+      "position": {
+        "x": 680,
+        "y": 97.65877981208149
+      },
+      "data": {
+        "label": "HDFC Bank Limited",
+        "type": "Bank",
+        "details": "NYQ - HDB",
+        "ticker": "HDB.NS",
+        "isUnconnected": false
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 680,
+        "y": 97.65877981208149
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775672122462",
+      "type": "custom",
+      "position": {
+        "x": 280,
+        "y": 399.7549950452783
+      },
+      "data": {
+        "label": "Kotak Funds - India ESG Fund A ",
+        "type": "Bank",
+        "details": "PNK - 0P0000OQWJ",
+        "ticker": "0P0000OQWJ.NS",
+        "isUnconnected": false
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 280,
+        "y": 399.7549950452783
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1775672650807",
+      "type": "custom",
+      "position": {
+        "x": 450.93437500000005,
+        "y": 430.2775111373057
+      },
+      "data": {
+        "label": "ICICI Bank Limited",
+        "type": "Bank",
+        "details": "NYQ - IBN",
+        "ticker": "IBN.NS",
+        "isUnconnected": false,
+        "defaultProbability": 0.1
+      },
+      "width": 80,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 450.93437500000005,
+        "y": 430.2775111373057
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "node-1775672072094",
+      "sourceHandle": null,
+      "target": "node-1775672090742",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672072094-node-1775672090742center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672072094",
+      "sourceHandle": null,
+      "target": "node-1775672122462",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672072094-node-1775672122462center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672122462",
+      "sourceHandle": null,
+      "target": "node-1775672090742",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672122462-node-1775672090742center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672097103",
+      "sourceHandle": null,
+      "target": "node-1775672090742",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672097103-node-1775672090742center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672097103",
+      "sourceHandle": null,
+      "target": "node-1775672122462",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672097103-node-1775672122462center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672105993",
+      "sourceHandle": null,
+      "target": "node-1775672090742",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672105993-node-1775672090742center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672105993",
+      "sourceHandle": null,
+      "target": "node-1775672097103",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672105993-node-1775672097103center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672650807",
+      "sourceHandle": null,
+      "target": "node-1775672090742",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672650807-node-1775672090742center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    },
+    {
+      "source": "node-1775672650807",
+      "sourceHandle": null,
+      "target": "node-1775672122462",
+      "targetHandle": "center",
+      "type": "custom",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 15,
+        "height": 15,
+        "color": "#6366f1"
+      },
+      "style": {
+        "stroke": "#a5b4fc",
+        "strokeWidth": 2
+      },
+      "id": "reactflow__edge-node-1775672650807-node-1775672122462center",
+      "data": {
+        "isFailed": false,
+        "isCongested": false
+      }
+    }
+  ]
+}

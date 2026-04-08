@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-    baseURL: 'https://api.featherless.ai/v1',
-    apiKey: process.env.NEXT_FEATHERLESS_API_KEY,
+    baseURL: 'https://api.groq.com/openai/v1',
+    apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function POST(req: Request) {
@@ -74,7 +74,7 @@ CCP Funds:
 Provide your expert analysis:`;
 
         const completion = await client.chat.completions.create({
-            model: 'Qwen/Qwen2.5-7B-Instruct',
+            model: 'llama-3.3-70b-versatile',
             messages: [
                 { role: 'system', content: systemPrompt },
                 { role: 'user', content: userPrompt }
