@@ -1,3 +1,13 @@
+---
+title: Equilibrium-Backend
+emoji: ⚖️
+colorFrom: indigo
+colorTo: slate
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Equilibrium: Financial Risk Intelligence Backend
 
 This directory contains the core simulation engine and API for **Equilibrium**, a platform designed for systemic risk analysis and financial network stress testing.
