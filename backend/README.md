@@ -2,7 +2,7 @@
 title: Equilibrium-Backend
 emoji: ⚖️
 colorFrom: indigo
-colorTo: slate
+colorTo: green   
 sdk: docker
 app_port: 7860
 pinned: false
