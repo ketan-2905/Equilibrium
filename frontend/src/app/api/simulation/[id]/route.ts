@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ id: string }> }) {
     try {
-        const { id } = await params
+        const { id } = await context.params
         const filePath = path.join(process.cwd(), `src/data/simulations/${id}.json`);
 
         if (!fs.existsSync(filePath)) {
@@ -18,10 +18,10 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, context: { params: Promise<{ id: string }> }) {
     try {
-        const { id } = await params
-        const { nodes, edges } = await req.json();
+        const { id } = await context.params
+        const { nodes, edges } = await request.json();
         const filePath = path.join(process.cwd(), `src/data/simulations/${id}.json`);
 
         fs.writeFileSync(filePath, JSON.stringify({ nodes, edges }, null, 2));
