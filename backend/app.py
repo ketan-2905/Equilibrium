@@ -181,6 +181,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Import and register routers
+from routers import balance_sheet
+app.include_router(balance_sheet.router, prefix="/api", tags=["balance_sheet"])
+
 # Resolve paths relative to this file's directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, "..", "frontend", "config.json")

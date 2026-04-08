@@ -21,7 +21,7 @@ import ReactFlow, {
     useReactFlow
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { Network, Plus, Trash2, Send, Save, Activity, Search, X, Play, Loader2, TrendingUp, AlertTriangle, Zap, Settings, Sliders, Calendar } from 'lucide-react';
+import { Network, Plus, Trash2, Send, Save, Activity, Search, X, Play, Loader2, TrendingUp, AlertTriangle, Zap, Settings, Sliders, Calendar, Shield, Building2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { CCPAnalyticsPanel } from '@/components/CCPAnalyticsPanel';
 
@@ -213,6 +213,15 @@ const FinancialNode = ({ data, id, selected }: NodeProps & { selected?: boolean 
                 <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">{data.type}</span>
                 <h3 className="font-bold text-slate-800 text-sm mb-1">{data.label}</h3>
                 <p className="text-[9px] text-slate-400">{data.details}</p>
+                {data.credibility && (
+                    <div className={`mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold ${data.credibility >= 85 ? 'bg-emerald-100 text-emerald-700' :
+                        data.credibility >= 75 ? 'bg-blue-100 text-blue-700' :
+                            'bg-amber-100 text-amber-700'
+                        }`}>
+                        <Shield size={10} />
+                        Credibility: {data.credibility}%
+                    </div>
+                )}
                 {isUnconnected && <p className="text-[9px] text-red-500 font-bold mt-1">Unconnected</p>}
             </div>
         </div>
@@ -235,6 +244,10 @@ export default function SimulationWorkspace() {
     const [simulationLoading, setSimulationLoading] = useState(false);
     const [simulationError, setSimulationError] = useState<string | null>(null);
 
+    // Expert Analysis State
+    const [analysis, setAnalysis] = useState<string | null>(null);
+    const [analysisLoading, setAnalysisLoading] = useState(false);
+
     // Node Selection & Shock State
     const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
     const [shockMagnitudeByNode, setShockMagnitudeByNode] = useState<Record<string, number>>({});
@@ -246,7 +259,7 @@ export default function SimulationWorkspace() {
     const [correlationRegime, setCorrelationRegime] = useState(0.7);
     const [steps, setSteps] = useState(10);
     const [showSliders, setShowSliders] = useState(false);
-    const [startDate, setStartDate] = useState('2023-01-01');  // Default start date
+    const [startDate, setStartDate] = useState('2024-01-01');  // Default start date - ensures sufficient historical data
 
     // Search State
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -408,6 +421,33 @@ export default function SimulationWorkspace() {
         }));
     };
 
+    // Generate Expert Analysis
+    const generateAnalysis = async (simulationData: SimulationResult) => {
+        setAnalysisLoading(true);
+        try {
+            const response = await fetch('/api/analyze-simulation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ simulationResults: simulationData })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setAnalysis(data.analysis);
+            } else {
+                console.error('Analysis generation failed:', data.error);
+                // Show fallback message from API or default
+                setAnalysis(data.analysis || "Analysis service unavailable. Please try again later.");
+            }
+        } catch (error) {
+            console.error('Analysis error:', error);
+            setAnalysis("Unable to connect to analysis service. Please check your connection and try again.");
+        } finally {
+            setAnalysisLoading(false);
+        }
+    };
+
     // Run Simulation API call
     const runSimulation = async () => {
         const tickers = getTickersFromNodes();
@@ -449,6 +489,9 @@ export default function SimulationWorkspace() {
 
             const result: SimulationResult = await response.json();
             setSimulation(result);
+
+            // Auto-generate expert analysis
+            generateAnalysis(result);
 
             // Update edges to show failed connections (red edges) and congestion (orange edges)
             setEdges(currentEdges => currentEdges.map(edge => {
@@ -537,7 +580,8 @@ export default function SimulationWorkspace() {
                 const newNodes = action.nodes.map((n: any, i: number) => ({
                     id: `node-${Date.now()}-${i}`,
                     type: 'custom',
-                    position: { x: startX + (i * 130), y: startY + (Math.random() * 80 - 40) },
+                    // Use position from backend if provided, otherwise calculate horizontal line
+                    position: n.position || { x: startX + (i * 130), y: startY + (Math.random() * 80 - 40) },
                     data: n.data || { label: n.label, type: 'Bank', details: n.details }
                 }));
                 setNodes(nds => [...nds, ...newNodes]);
@@ -974,9 +1018,35 @@ export default function SimulationWorkspace() {
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Risk Analysis</h2>
                             {simulation && (
-                                <div className="flex items-center gap-1">
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    <span className="text-[10px] font-medium text-emerald-600">Done</span>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => generateAnalysis(simulation)}
+                                        disabled={analysisLoading}
+                                        className="flex items-center gap-1 px-2 py-1 text-[10px] font-medium text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 rounded-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {analysisLoading ? (
+                                            <>
+                                                <Loader2 size={10} className="animate-spin" />
+                                                Analyzing...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <TrendingUp size={10} />
+                                                Generate Insights
+                                            </>
+                                        )}
+                                    </button>
+                                    <button
+                                        onClick={() => window.location.href = '/dashboard/institutions'}
+                                        className="flex items-center gap-1 px-2 py-1 text-[10px] font-medium text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-md transition-all"
+                                    >
+                                        <Building2 size={10} />
+                                        Explain Institutions
+                                    </button>
+                                    <div className="flex items-center gap-1">
+                                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span className="text-[10px] font-medium text-emerald-600">Done</span>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -1096,6 +1166,26 @@ export default function SimulationWorkspace() {
                                         </div>
                                     )}
                                 </div>
+
+                                {/* Expert Insights Panel */}
+                                {(analysis || analysisLoading) && (
+                                    <div className="p-4 rounded-xl border bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-200">
+                                        <h3 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-indigo-600 flex items-center gap-1.5">
+                                            <TrendingUp size={12} />
+                                            Expert Insights
+                                        </h3>
+                                        {analysisLoading ? (
+                                            <div className="flex items-center justify-center py-4">
+                                                <Loader2 size={16} className="animate-spin text-indigo-500" />
+                                                <span className="ml-2 text-[10px] text-indigo-600">Analyzing results...</span>
+                                            </div>
+                                        ) : analysis ? (
+                                            <div className="text-[10px] text-slate-700 leading-relaxed whitespace-pre-line">
+                                                {analysis}
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                )}
 
                                 <div className="text-[9px] text-slate-400 text-center">
                                     Data: {simulation.end_date}

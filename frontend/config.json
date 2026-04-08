@@ -17,7 +17,7 @@
         "BHARTIARTL.NS"
     ],
     "ccp_name": "CCP",
-    "start": "2022-01-01",
+    "start": "2024-01-01",
     "ret_window": 20,
     "lookback": 20,
     "delta_ccp": 0.1

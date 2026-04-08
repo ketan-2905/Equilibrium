@@ -13,7 +13,7 @@
 // const HyperModernLanding: React.FC = () => {
 //   return (
 //     <div className="min-h-screen bg-black text-slate-300 font-sans antialiased selection:bg-indigo-500/30">
-      
+
 //       {/* Background Glows */}
 //       <div className="fixed inset-0 overflow-hidden pointer-events-none">
 //         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full" />
@@ -44,7 +44,7 @@
 //         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400 mb-10">
 //           <Zap size={12} /> Systemic Risk Intelligence
 //         </div>
-        
+
 //         <h1 className="text-6xl md:text-8xl font-bold text-white tracking-tighter mb-8 leading-[0.9]">
 //           Infrastructure <br />
 //           <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 italic">
@@ -71,7 +71,7 @@
 //       {/* The Bento Framework */}
 //       <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
 //         <div className="grid grid-cols-12 gap-4">
-          
+
 //           {/* Main Problem Statement Card */}
 //           <div className="col-span-12 lg:col-span-8 p-1 rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
 //             <div className="h-full bg-black rounded-[calc(1.5rem-1px)] p-10 flex flex-col justify-between overflow-hidden relative">
@@ -168,9 +168,9 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sphere, Line, Billboard, Circle } from '@react-three/drei';
 import * as THREE from 'three';
-import { 
-  Network, Orbit, Fingerprint, Activity, ArrowRight, 
-  Zap, ShieldCheck, BarChart3, Globe, Database 
+import {
+  Network, Orbit, Fingerprint, Activity, ArrowRight,
+  Zap, ShieldCheck, BarChart3, Globe, Database
 } from 'lucide-react';
 
 /** * 3D Network Background Component 
@@ -214,7 +214,7 @@ import {
 
 // const NetworkBackground: React.FC = () => {
 //   const nodeCount = 40; // Number of circular nodes
-  
+
 //   // 1. Generate fixed positions for nodes first
 //   const nodePositions = useMemo(() => {
 //     return Array.from({ length: nodeCount }).map(() => (
@@ -317,7 +317,7 @@ import {
 
 //   // 3. Animation Logic (Pulsing and Drifting)
 //   const groupRef = useRef<THREE.Group>(null);
-  
+
 //   useFrame((state) => {
 //     const t = state.clock.getElapsedTime();
 //     if (groupRef.current) {
@@ -394,7 +394,7 @@ const NetworkBackground: React.FC = () => {
 
   // 3. Animation Logic: Full 360 Rotation
   const groupRef = useRef<THREE.Group>(null);
-  
+
   useFrame((state, delta) => {
     if (groupRef.current) {
       // Continuous 360-degree rotation on Y axis
@@ -408,13 +408,13 @@ const NetworkBackground: React.FC = () => {
     <group ref={groupRef}>
       {/* RENDER CONNECTIONS */}
       {connections.map((points, i) => (
-        <Line 
-          key={`line-${i}`} 
-          points={points as [THREE.Vector3, THREE.Vector3]} 
-          color={config.lineColor} 
-          lineWidth={0.8} 
-          transparent 
-          opacity={config.lineOpacity} 
+        <Line
+          key={`line-${i}`}
+          points={points as [THREE.Vector3, THREE.Vector3]}
+          color={config.lineColor}
+          lineWidth={0.8}
+          transparent
+          opacity={config.lineOpacity}
         />
       ))}
 
@@ -422,18 +422,18 @@ const NetworkBackground: React.FC = () => {
       {nodePositions.map((pos, i) => (
         <Billboard key={`node-${i}`} position={pos}>
           <Circle args={[config.nodeSize, 32]}>
-            <meshBasicMaterial 
-              color={config.nodeColor} 
-              transparent 
-              opacity={0.9} 
+            <meshBasicMaterial
+              color={config.nodeColor}
+              transparent
+              opacity={0.9}
             />
           </Circle>
           {/* Subtle Outer Glow Layer */}
           <Circle args={[config.nodeSize * 1.5, 32]}>
-            <meshBasicMaterial 
-              color={config.nodeColor} 
-              transparent 
-              opacity={0.15} 
+            <meshBasicMaterial
+              color={config.nodeColor}
+              transparent
+              opacity={0.15}
             />
           </Circle>
         </Billboard>
@@ -460,9 +460,9 @@ const AnimatedNode = ({ position, size, color, pulseSpeed }: any) => {
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5} position={position.toArray()}>
       <Sphere ref={meshRef} args={[size, 32, 32]}>
-        <meshStandardMaterial 
-          color={color} 
-          emissive={color} 
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
           emissiveIntensity={1.5} // Makes it look like a glowing circle
           toneMapped={false}
         />
@@ -474,7 +474,7 @@ const AnimatedNode = ({ position, size, color, pulseSpeed }: any) => {
 const EquilibriumLanding: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-indigo-100 overflow-x-hidden">
-      
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-10 py-5 bg-white/80 backdrop-blur-md border-b border-slate-100">
         <div className="flex items-center gap-2.5">
@@ -507,7 +507,7 @@ const EquilibriumLanding: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 mb-8 shadow-sm">
             <Zap size={12} fill="currentColor" /> Systemic Risk Intelligence
           </div>
-          
+
           <h1 className="text-7xl md:text-9xl font-bold text-slate-900 tracking-tighter mb-8 leading-[0.85]">
             Infrastructure <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-slate-900 to-slate-500 italic">
@@ -516,14 +516,14 @@ const EquilibriumLanding: React.FC = () => {
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-500 font-medium leading-relaxed mb-12">
-            A network-based modeling engine analyzing strategic interactions among 
+            A network-based modeling engine analyzing strategic interactions among
             global institutions. Predict cascading failures with computational precision.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button className="px-10 py-5 bg-slate-900 text-white rounded-full font-bold text-lg hover:bg-black transition-all shadow-2xl shadow-slate-400/20 active:scale-95">
+            <a href="/dashboard" className="px-10 py-5 bg-slate-900 text-white rounded-full font-bold text-lg hover:bg-black transition-all shadow-2xl shadow-slate-400/20 active:scale-95">
               Launch Framework
-            </button>
+            </a>
             <button className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors">
               Technical Documentation <ArrowRight size={18} />
             </button>
@@ -531,9 +531,9 @@ const EquilibriumLanding: React.FC = () => {
         </div>
       </section>
 
- <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-12 gap-6">
-          
+
           {/* Bento Card: The Logic Map */}
           <div className="col-span-12 lg:col-span-7 bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm flex flex-col justify-between group hover:border-indigo-200 transition-colors">
             <div>
@@ -542,69 +542,69 @@ const EquilibriumLanding: React.FC = () => {
               </div>
               <h3 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">The Network Interaction Model</h3>
               <p className="text-slate-500 leading-relaxed max-w-lg mb-8">
-                We capture how local decisions—credit provision, margin requirements, 
-                and trade routing—interact through network connections like credit 
+                We capture how local decisions—credit provision, margin requirements,
+                and trade routing—interact through network connections like credit
                 exposures and settlement obligations.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4 border-t border-slate-100 pt-8">
-                <div className="text-center">
-                    <p className="text-xs font-bold uppercase text-slate-400 mb-1">Incentives</p>
-                    <p className="text-lg font-bold text-slate-900 italic">Strategic</p>
-                </div>
-                <div className="text-center border-x border-slate-100">
-                    <p className="text-xs font-bold uppercase text-slate-400 mb-1">Information</p>
-                    <p className="text-lg font-bold text-slate-900 italic">Incomplete</p>
-                </div>
-                <div className="text-center">
-                    <p className="text-xs font-bold uppercase text-slate-400 mb-1">Outcome</p>
-                    <p className="text-lg font-bold text-slate-900 italic">Resilient</p>
-                </div>
+              <div className="text-center">
+                <p className="text-xs font-bold uppercase text-slate-400 mb-1">Incentives</p>
+                <p className="text-lg font-bold text-slate-900 italic">Strategic</p>
+              </div>
+              <div className="text-center border-x border-slate-100">
+                <p className="text-xs font-bold uppercase text-slate-400 mb-1">Information</p>
+                <p className="text-lg font-bold text-slate-900 italic">Incomplete</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xs font-bold uppercase text-slate-400 mb-1">Outcome</p>
+                <p className="text-lg font-bold text-slate-900 italic">Resilient</p>
+              </div>
             </div>
           </div>
 
           {/* Side Card: Systemic Impact */}
           <div className="col-span-12 lg:col-span-5 bg-slate-50 p-10 rounded-[2.5rem] border border-slate-200 flex flex-col justify-center overflow-hidden relative">
             <div className="absolute top-[-20%] right-[-20%] opacity-5">
-                <Globe size={300} />
+              <Globe size={300} />
             </div>
             <div className="relative z-10">
-                <h4 className="text-sm font-black uppercase tracking-widest text-indigo-600 mb-4">Macro Outcomes</h4>
-                <div className="space-y-6">
-                    <ImpactMetric label="Liquidity Flow" value="Optimized" color="bg-emerald-500" />
-                    <ImpactMetric label="Congestion Risk" value="Minimal" color="bg-indigo-500" />
-                    <ImpactMetric label="Financial Stability" value="Validated" color="bg-cyan-500" />
-                </div>
-                <div className="mt-10 p-5 bg-white rounded-2xl border border-slate-200 font-mono text-[11px] text-slate-400">
-                    
-                    <br />
-                   {" $ \text{Stability} = f(\text{micro\_decisions}) $"}
-                </div>
+              <h4 className="text-sm font-black uppercase tracking-widest text-indigo-600 mb-4">Macro Outcomes</h4>
+              <div className="space-y-6">
+                <ImpactMetric label="Liquidity Flow" value="Optimized" color="bg-emerald-500" />
+                <ImpactMetric label="Congestion Risk" value="Minimal" color="bg-indigo-500" />
+                <ImpactMetric label="Financial Stability" value="Validated" color="bg-cyan-500" />
+              </div>
+              <div className="mt-10 p-5 bg-white rounded-2xl border border-slate-200 font-mono text-[11px] text-slate-400">
+
+                <br />
+                {" $ \text{Stability} = f(\text{micro\_decisions}) $"}
+              </div>
             </div>
           </div>
 
           {/* Business Impact Row */}
           <div className="col-span-12 grid md:grid-cols-4 gap-6 mt-6">
-             <ImpactBox 
-                icon={<ShieldCheck className="text-indigo-600" />} 
-                title="Regulators" 
-                desc="Understand how micro-level decisions create macro-level risks." 
-             />
-             <ImpactBox 
-                icon={<Activity className="text-emerald-600" />} 
-                title="Institutions" 
-                desc="Detect fragile structures and bottlenecks in settlement." 
-             />
-             <ImpactBox 
-                icon={<BarChart3 className="text-cyan-600" />} 
-                title="Management" 
-                desc="Improve risk management against economic shocks." 
-             />
-             <ImpactBox 
-                icon={<Database className="text-slate-600" />} 
-                title="Clearing" 
-                desc="Support safer mechanisms and aligned incentives." 
-             />
+            <ImpactBox
+              icon={<ShieldCheck className="text-indigo-600" />}
+              title="Regulators"
+              desc="Understand how micro-level decisions create macro-level risks."
+            />
+            <ImpactBox
+              icon={<Activity className="text-emerald-600" />}
+              title="Institutions"
+              desc="Detect fragile structures and bottlenecks in settlement."
+            />
+            <ImpactBox
+              icon={<BarChart3 className="text-cyan-600" />}
+              title="Management"
+              desc="Improve risk management against economic shocks."
+            />
+            <ImpactBox
+              icon={<Database className="text-slate-600" />}
+              title="Clearing"
+              desc="Support safer mechanisms and aligned incentives."
+            />
           </div>
         </div>
       </section>
@@ -614,29 +614,29 @@ const EquilibriumLanding: React.FC = () => {
         <div className="max-w-7xl mx-auto px-10">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center gap-2 mb-6">
-                    <Orbit className="text-slate-900" size={24} />
-                    <span className="text-xl font-bold tracking-tighter uppercase">Equilibrium</span>
-                </div>
-                <p className="max-w-xs text-sm text-slate-500 leading-relaxed italic font-serif">
-                    "Analyzing individual incentives to safeguard global financial infrastructure through network-based game theory."
-                </p>
+              <div className="flex items-center gap-2 mb-6">
+                <Orbit className="text-slate-900" size={24} />
+                <span className="text-xl font-bold tracking-tighter uppercase">Equilibrium</span>
+              </div>
+              <p className="max-w-xs text-sm text-slate-500 leading-relaxed italic font-serif">
+                "Analyzing individual incentives to safeguard global financial infrastructure through network-based game theory."
+              </p>
             </div>
             <div>
-                <h5 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">Framework</h5>
-                <ul className="text-sm text-slate-500 space-y-4 font-medium">
-                    <li className="hover:text-indigo-600 cursor-pointer">Nash Equilibrium</li>
-                    <li className="hover:text-indigo-600 cursor-pointer">Network Propagation</li>
-                    <li className="hover:text-indigo-600 cursor-pointer">Settlement Logic</li>
-                </ul>
+              <h5 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">Framework</h5>
+              <ul className="text-sm text-slate-500 space-y-4 font-medium">
+                <li className="hover:text-indigo-600 cursor-pointer">Nash Equilibrium</li>
+                <li className="hover:text-indigo-600 cursor-pointer">Network Propagation</li>
+                <li className="hover:text-indigo-600 cursor-pointer">Settlement Logic</li>
+              </ul>
             </div>
             <div>
-                <h5 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">Legal</h5>
-                <ul className="text-sm text-slate-500 space-y-4 font-medium">
-                    <li className="hover:text-indigo-600 cursor-pointer">Privacy Policy</li>
-                    <li className="hover:text-indigo-600 cursor-pointer">Terms of Service</li>
-                    <li className="hover:text-indigo-600 cursor-pointer">Regulatory Compliance</li>
-                </ul>
+              <h5 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">Legal</h5>
+              <ul className="text-sm text-slate-500 space-y-4 font-medium">
+                <li className="hover:text-indigo-600 cursor-pointer">Privacy Policy</li>
+                <li className="hover:text-indigo-600 cursor-pointer">Terms of Service</li>
+                <li className="hover:text-indigo-600 cursor-pointer">Regulatory Compliance</li>
+              </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -644,8 +644,8 @@ const EquilibriumLanding: React.FC = () => {
               © 2026 Financial Infrastructure Modeling Inc.
             </p>
             <div className="flex gap-6 text-slate-400">
-                <Fingerprint size={20} className="hover:text-indigo-600 cursor-pointer transition-colors" />
-                <Globe size={20} className="hover:text-indigo-600 cursor-pointer transition-colors" />
+              <Fingerprint size={20} className="hover:text-indigo-600 cursor-pointer transition-colors" />
+              <Globe size={20} className="hover:text-indigo-600 cursor-pointer transition-colors" />
             </div>
           </div>
         </div>
@@ -655,13 +655,13 @@ const EquilibriumLanding: React.FC = () => {
 };
 
 const ImpactMetric = ({ label, value, color }: { label: string, value: string, color: string }) => (
-    <div className="flex justify-between items-center group">
-        <div className="flex items-center gap-3">
-            <div className={`w-1.5 h-1.5 rounded-full ${color}`} />
-            <span className="text-sm font-bold text-slate-600">{label}</span>
-        </div>
-        <span className="text-xs font-black uppercase text-slate-400 group-hover:text-slate-900 transition-colors">{value}</span>
+  <div className="flex justify-between items-center group">
+    <div className="flex items-center gap-3">
+      <div className={`w-1.5 h-1.5 rounded-full ${color}`} />
+      <span className="text-sm font-bold text-slate-600">{label}</span>
     </div>
+    <span className="text-xs font-black uppercase text-slate-400 group-hover:text-slate-900 transition-colors">{value}</span>
+  </div>
 );
 
 const ImpactBox = ({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) => (

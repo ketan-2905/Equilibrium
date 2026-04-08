@@ -59,6 +59,34 @@ export default function DashboardPage() {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* OTC Simulation Card - Always Visible */}
+        <Link
+          href="/dashboard/otc-simulation/otc-1"
+          className="group relative bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl p-6 border-2 border-purple-400/30 hover:border-purple-300 hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 flex flex-col justify-between h-64"
+        >
+          <div className="absolute top-4 right-4 text-purple-200 group-hover:text-white transition-colors">
+            <Server size={24} />
+          </div>
+
+          <div>
+            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+              <Activity size={24} />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">OTC Simulation</h3>
+            <p className="text-sm text-purple-100 line-clamp-2">
+              Over-the-Counter derivatives network simulation with real-time risk analysis.
+            </p>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-between">
+            <span className="text-xs text-purple-100 font-medium">Network Analysis</span>
+            <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold text-white">
+              Launch →
+            </span>
+          </div>
+        </Link>
+
+        {/* Existing Simulations */}
         {simulations.map((sim) => (
           <Link
             key={sim.id}

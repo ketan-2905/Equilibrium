@@ -10,6 +10,46 @@ export async function POST(req: Request) {
     try {
         const { message, currentGraph, isAgentMode } = await req.json();
 
+        // Static Mapping: Add All 15 Stocks
+        const isAddAllStocks = message.toLowerCase().includes('all 15') ||
+            message.toLowerCase().includes('all fifteen') ||
+            message.toLowerCase().includes('all institutions') ||
+            message.toLowerCase().includes('add all stocks');
+
+        if (isAddAllStocks) {
+            // Neural network style layout - organic positioning around center
+            const centerX = 400;
+            const centerY = 300;
+
+            const response = {
+                type: 'add_nodes',
+                nodes: [
+                    // Inner layer (closer to center) - High credibility banks
+                    { label: 'HDFC Bank', position: { x: centerX - 180, y: centerY - 80 }, data: { label: 'HDFC Bank', type: 'Bank', details: 'NSE - HDFCBANK', ticker: 'HDFCBANK.NS', credibility: 92 } },
+                    { label: 'ICICI Bank', position: { x: centerX + 160, y: centerY - 100 }, data: { label: 'ICICI Bank', type: 'Bank', details: 'NSE - ICICIBANK', ticker: 'ICICIBANK.NS', credibility: 90 } },
+                    { label: 'SBI', position: { x: centerX - 90, y: centerY + 120 }, data: { label: 'State Bank of India', type: 'Bank', details: 'NSE - SBIN', ticker: 'SBIN.NS', credibility: 95 } },
+                    { label: 'Axis Bank', position: { x: centerX + 130, y: centerY + 90 }, data: { label: 'Axis Bank', type: 'Bank', details: 'NSE - AXISBANK', ticker: 'AXISBANK.NS', credibility: 88 } },
+
+                    // Mid layer (medium distance) - Diverse sectors
+                    { label: 'Kotak Bank', position: { x: centerX - 250, y: centerY - 150 }, data: { label: 'Kotak Mahindra Bank', type: 'Bank', details: 'NSE - KOTAKBANK', ticker: 'KOTAKBANK.NS', credibility: 91 } },
+                    { label: 'Bajaj Finance', position: { x: centerX + 240, y: centerY - 180 }, data: { label: 'Bajaj Finance', type: 'FinTech', details: 'NSE - BAJFINANCE', ticker: 'BAJFINANCE.NS', credibility: 86 } },
+                    { label: 'TCS', position: { x: centerX - 280, y: centerY + 30 }, data: { label: 'TCS', type: 'IT', details: 'NSE - TCS', ticker: 'TCS.NS', credibility: 94 } },
+                    { label: 'Reliance', position: { x: centerX + 270, y: centerY + 40 }, data: { label: 'Reliance Industries', type: 'Conglomerate', details: 'NSE - RELIANCE', ticker: 'RELIANCE.NS', credibility: 89 } },
+                    { label: 'BSE', position: { x: centerX - 200, y: centerY + 170 }, data: { label: 'BSE', type: 'Exchange', details: 'NSE - BSE', ticker: 'BSE.NS', credibility: 93 } },
+                    { label: 'Tata Steel', position: { x: centerX + 220, y: centerY + 180 }, data: { label: 'Tata Steel', type: 'Industrial', details: 'NSE - TATASTEEL', ticker: 'TATASTEEL.NS', credibility: 87 } },
+
+                    // Outer layer (furthest from center)
+                    { label: 'Infosys', position: { x: centerX, y: centerY - 220 }, data: { label: 'Infosys', type: 'IT', details: 'NSE - INFY', ticker: 'INFY.NS', credibility: 93 } },
+                    { label: 'Adani', position: { x: centerX - 320, y: centerY - 60 }, data: { label: 'Adani Enterprises', type: 'Conglomerate', details: 'NSE - ADANIENT', ticker: 'ADANIENT.NS', credibility: 72 } },
+                    { label: 'HUL', position: { x: centerX + 310, y: centerY - 50 }, data: { label: 'Hindustan Unilever', type: 'Consumer', details: 'NSE - HINDUNILVR', ticker: 'HINDUNILVR.NS', credibility: 91 } },
+                    { label: 'MRF', position: { x: centerX - 300, y: centerY + 140 }, data: { label: 'MRF', type: 'Consumer', details: 'NSE - MRF', ticker: 'MRF.NS', credibility: 85 } },
+                    { label: 'Airtel', position: { x: centerX + 290, y: centerY + 160 }, data: { label: 'Bharti Airtel', type: 'Telecom', details: 'NSE - BHARTIARTL', ticker: 'BHARTIARTL.NS', credibility: 88 } }
+                ],
+                message: '✅ Added all 15 institutions in a neural network layout around the center. They will auto-connect to CCP forming an organic network structure!'
+            };
+            return NextResponse.json(response);
+        }
+
         // Agent Mode Auto-Simulation Detection
         const isAutoSimPrompt = message.toLowerCase().includes('hdfcbank') &&
             message.toLowerCase().includes('icicibank') &&
@@ -58,7 +98,7 @@ export async function POST(req: Request) {
                         }
                     }
                 ],
-                message: '✅ Agent Mode: Added HDFC Bank, ICICI Bank, Kotak Mahindra Bank, and State Bank of India to the canvas. Connect them to the CCP node and click "Run Analysis" to start the simulation.'
+                message: '✅ Agent Mode: Added HDFC Bank, ICICI Bank, Kotak Mahindra Bank, and State Bank of India to the canvas. Connect them to the CCP node and click \"Run Analysis\" to start the simulation.'
             };
             return NextResponse.json(response);
         }
@@ -74,7 +114,7 @@ Current Graph State:
 ${isAgentMode ? '\n**AGENT MODE ACTIVE**: You have enhanced capabilities to automatically execute multi-step workflows.' : ''}
 
 Your Task:
-Interpret the user's natural language request to MODIFIY the graph.
+Interpret the user's natural language request to MODIFY the graph.
 You can ADD nodes (Banks), ADD edges (Connections), REMOVE items, or clear the graph.
 
 CRITICAL RULES:
